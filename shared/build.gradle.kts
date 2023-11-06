@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    id("io.realm.kotlin") version "1.11.0"
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -28,7 +29,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                //put your multiplatform dependencies here
+                implementation("io.realm.kotlin:library-base:1.11.0")
+                implementation("io.realm.kotlin:library-sync:1.11.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
             }
         }
         val commonTest by getting {

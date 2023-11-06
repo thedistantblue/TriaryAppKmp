@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_screen_local_use">Local use</string>
+    <string name="login_screen_online_use">Online use</string>
+    <string name="tab_screen_power">Power training</string>
+    <string name="tab_screen_cardio">Cardio training</string>
+</resources>
