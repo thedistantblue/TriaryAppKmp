@@ -4,4 +4,5 @@
     <string name="login_screen_online_use">Online use</string>
     <string name="tab_screen_power">Power training</string>
     <string name="tab_screen_cardio">Cardio training</string>
+    <string name="tab_screen_app_bar">TriaryApp</string>
 </resources>

@@ -4,4 +4,5 @@
     <string name="login_screen_online_use">Онлайн использование</string>
     <string name="tab_screen_power">Силовые тренировки</string>
     <string name="tab_screen_cardio">Кардио тренировки</string>
+    <string name="tab_screen_app_bar">TriaryApp</string>
 </resources>
