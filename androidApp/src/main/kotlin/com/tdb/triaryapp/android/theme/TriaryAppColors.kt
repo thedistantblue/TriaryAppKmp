@@ -15,10 +15,11 @@ object TriaryAppColors {
     val DarkColorScheme = darkColorScheme(
         primary = triaryAppPrimary,
         onPrimary = triaryAppOnPrimary,
+        primaryContainer = triaryAppPrimary,
         secondary = triaryAppSecondary,
         onSecondary = triaryAppOnSecondary,
         surface = triaryAppSurface,
         onSurface = triaryAppOnSurface,
-        background = triaryAppBackground,
+        background = triaryAppBackground
     )
 }

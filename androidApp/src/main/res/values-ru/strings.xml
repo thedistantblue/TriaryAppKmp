@@ -5,4 +5,10 @@
     <string name="tab_screen_power">Силовые тренировки</string>
     <string name="tab_screen_cardio">Кардио тренировки</string>
     <string name="tab_screen_app_bar">TriaryApp</string>
+    <string name="training_name">Название тренировки</string>
+    <string name="training_description">Описание тренировки</string>
+    <string name="training_create">Создать тренировку</string>
+    <string name="training_save">Сохранить тренировку</string>
+    <string name="training_created_toast">Тренировка успешно создана!</string>
+    <string name="training_saved_toast">Тренировка успешно сохранена!</string>
 </resources>

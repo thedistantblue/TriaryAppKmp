@@ -1,8 +1,11 @@
 package com.tdb.triaryapp.android
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
@@ -16,10 +19,26 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.tdb.triaryapp.RepositoryFactory
+import com.tdb.triaryapp.android.power.PowerTrainingList
+import com.tdb.triaryapp.android.power.PowerTrainingSettingsScreen
+import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingListViewModel
+import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingListViewModelFactory
+import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingViewModel
+import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingViewModelFactory
 import com.thedistantblue.triaryapp.theme.TriaryAppTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val repository = RepositoryFactory.createTrainingRepository()
+    private lateinit var trainingViewModel: Lazy<PowerTrainingViewModel>
+    private lateinit var trainingListViewModel: Lazy<PowerTrainingListViewModel>
+
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
+        this.trainingViewModel = viewModels { PowerTrainingViewModelFactory.getFactory(repository) }
+        this.trainingListViewModel = viewModels { PowerTrainingListViewModelFactory.getFactory(repository) }
+
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
@@ -31,7 +50,13 @@ class MainActivity : ComponentActivity() {
                 ) {
                     NavHost(navController = navController, startDestination = "main") {
                         composable("main") { MainScreen(navController) }
-                        composable("local/tabs") { TabsScreen(navController) }
+                        composable("local/tabs") { TabsScreen(navController, trainingListViewModel.value) }
+                        composable("local/tabs/create_power") {
+                            PowerTrainingSettingsScreen(navController,
+                                                        null,
+                                                        trainingViewModel.value)
+                        }
+                        composable("local/tabs/create_cardio") {  }
                     }
                 }
             }
@@ -59,14 +84,26 @@ fun MainScreen(navController: NavController) {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.S)
 @Composable
-fun TabsScreen(navController: NavController) {
+fun TabsScreen(navController: NavController, powerTrainingListViewModel: PowerTrainingListViewModel) {
     Scaffold(topBar = { AppBar(navController) },
-             content = { Tabs(navController, it) })
+             content = { Tabs(powerTrainingListViewModel, navController, it) },
+             floatingActionButton = {
+                 ExtendedFloatingActionButton(
+                     onClick = { navController.navigate("local/tabs/create_power") },
+                     content = { Text("asd") }
+                 )
+             },)
 }
 
+@RequiresApi(Build.VERSION_CODES.S)
 @Composable
-fun Tabs(navController: NavController, paddingValues: PaddingValues) {
+fun Tabs(
+        powerTrainingListViewModel: PowerTrainingListViewModel,
+        navController: NavController,
+        paddingValues: PaddingValues
+) {
     var tabIndex by remember { mutableIntStateOf(0) }
     val tabs = listOf(R.string.tab_screen_power, R.string.tab_screen_cardio)
 
@@ -79,6 +116,9 @@ fun Tabs(navController: NavController, paddingValues: PaddingValues) {
                     onClick = { tabIndex = index }
                 )
             }
+        }
+        when (tabIndex) {
+            0 -> PowerTrainingList(navController, powerTrainingListViewModel)
         }
     }
 }
