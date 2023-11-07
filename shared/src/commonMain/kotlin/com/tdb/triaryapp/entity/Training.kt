@@ -6,7 +6,7 @@ import org.mongodb.kbson.ObjectId
 
 class Training(): RealmObject {
     @PrimaryKey
-    var id: ObjectId = ObjectId()
+    var _id: ObjectId = ObjectId()
     var name: String = ""
     var description: String = ""
 
@@ -16,7 +16,7 @@ class Training(): RealmObject {
     }
 
     constructor(id: ObjectId, name: String, description: String) : this() {
-        this.id = id
+        this._id = id
         this.name = name
         this.description = description
     }

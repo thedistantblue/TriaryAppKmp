@@ -43,7 +43,7 @@ private fun TrainingListItem(
         navController: NavController,
         viewModel: PowerTrainingListViewModel
 ) {
-    val trainingId = training.id.toHexString()
+    val trainingId = training._id.toHexString()
     TriaryAppSwipeToDismissCard(
         onClickAction = { navController.navigate(RouteConstants.Local.Tabs.Edit.EDIT_POWER + trainingId) },
         onDismissedToEndAction = {},

@@ -37,6 +37,7 @@ fun PowerTrainingSettingsScreen(
             returnAndShowToast(context, navController, R.string.training_created_toast)
         }
     } else {
+        viewModel.getTraining(ObjectId.invoke(trainingId))
         NameDescriptionScreen(nameHint = R.string.training_name,
                               descriptionHint = R.string.training_description,
                               buttonHint = R.string.training_save,

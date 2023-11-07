@@ -4,6 +4,7 @@ import com.tdb.triaryapp.entity.Training
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 import io.realm.kotlin.UpdatePolicy
+import io.realm.kotlin.query.RealmQuery
 import org.mongodb.kbson.ObjectId
 
 class TrainingRepositoryImpl : TrainingRepository {
@@ -27,11 +28,11 @@ class TrainingRepositoryImpl : TrainingRepository {
     }
 
     override fun findById(trainingId: ObjectId): Training {
-        return realm.query(Training::class, "_id == $trainingId").find().first()
+        return realm.query(Training::class, "_id == $0", trainingId).find().first()
     }
 
     override fun findAllById(trainingIds: Collection<ObjectId>): Collection<Training> {
-        TODO("Not yet implemented")
+        return realm.query(Training::class, "_id IN $0", trainingIds).find()
     }
 
     override fun findAll(): Collection<Training> {
