@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.tdb.triaryapp.android.RouteConstants
 import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingListViewModel
 import com.tdb.triaryapp.entity.Training
 import com.thedistantblue.triaryapp.theme.components.TriaryAppSwipeToDismissCard
@@ -42,9 +43,9 @@ private fun TrainingListItem(
         navController: NavController,
         viewModel: PowerTrainingListViewModel
 ) {
-    val packId = 0
+    val trainingId = training.id.toHexString()
     TriaryAppSwipeToDismissCard(
-        onClickAction = { navController.navigate("power_exercise_pack/$packId") },
+        onClickAction = { navController.navigate(RouteConstants.Local.Tabs.Edit.EDIT_POWER + trainingId) },
         onDismissedToEndAction = {},
         onDismissedToStartAction = {
             viewModel.deleteTraining(training)

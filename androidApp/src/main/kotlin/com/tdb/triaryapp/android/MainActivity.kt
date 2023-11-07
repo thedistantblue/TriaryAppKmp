@@ -16,9 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 import com.tdb.triaryapp.RepositoryFactory
 import com.tdb.triaryapp.android.power.PowerTrainingList
 import com.tdb.triaryapp.android.power.PowerTrainingSettingsScreen
@@ -48,19 +50,40 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavHost(navController = navController, startDestination = "main") {
-                        composable("main") { MainScreen(navController) }
-                        composable("local/tabs") { TabsScreen(navController, trainingListViewModel.value) }
-                        composable("local/tabs/create_power") {
-                            PowerTrainingSettingsScreen(navController,
-                                                        null,
-                                                        trainingViewModel.value)
-                        }
-                        composable("local/tabs/create_cardio") {  }
+                    NavHost(navController = navController, startDestination = RouteConstants.Main.MAIN) {
+                        composable(RouteConstants.Main.MAIN) { MainScreen(navController) }
+                        tabsRoute(navController, trainingViewModel.value, trainingListViewModel.value)
                     }
                 }
             }
         }
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.S)
+private fun NavGraphBuilder.tabsRoute(navController: NavController,
+                                      trainingViewModel: PowerTrainingViewModel,
+                                      trainingListViewModel: PowerTrainingListViewModel
+) {
+    navigation(startDestination = RouteConstants.Local.Tabs.TABS,
+               route = RouteConstants.Local.Tabs::class.java.name) {
+        composable(RouteConstants.Local.Tabs.TABS) {
+            TabsScreen(navController, trainingListViewModel)
+        }
+        composable(RouteConstants.Local.Tabs.Create.CREATE_POWER) {
+            PowerTrainingSettingsScreen(navController, null, trainingViewModel)
+        }
+        composable(RouteConstants.Local.Tabs.Edit.EDIT_POWER_ROUTE) {
+            PowerTrainingSettingsScreen(navController, it.arguments?.getString("trainingId"), trainingViewModel)
+        }
+        powerTrainingRoute(navController)
+    }
+}
+
+private fun NavGraphBuilder.powerTrainingRoute(navController: NavController) {
+    navigation(startDestination = RouteConstants.Local.Tabs.PowerTraining.POWER_TRAINING,
+               route = RouteConstants.Local.Tabs.PowerTraining::class.java.name) {
+        composable(RouteConstants.Local.Tabs.PowerTraining.POWER_TRAINING) {  }
     }
 }
 
@@ -72,7 +95,7 @@ fun MainScreen(navController: NavController) {
             verticalArrangement = Arrangement.Center
     ) {
         Button(onClick = {
-            navController.navigate("local/tabs")
+            navController.navigate(RouteConstants.Local.Tabs::class.java.name)
         }) {
             Text(text = stringResource(R.string.login_screen_local_use))
         }
@@ -91,7 +114,7 @@ fun TabsScreen(navController: NavController, powerTrainingListViewModel: PowerTr
              content = { Tabs(powerTrainingListViewModel, navController, it) },
              floatingActionButton = {
                  ExtendedFloatingActionButton(
-                     onClick = { navController.navigate("local/tabs/create_power") },
+                     onClick = { navController.navigate(RouteConstants.Local.Tabs.Create.CREATE_POWER) },
                      content = { Text(text = stringResource(R.string.fab_add)) }
                  )
              },)

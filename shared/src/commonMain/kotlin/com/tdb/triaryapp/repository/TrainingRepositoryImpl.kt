@@ -3,6 +3,7 @@ package com.tdb.triaryapp.repository
 import com.tdb.triaryapp.entity.Training
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
+import io.realm.kotlin.UpdatePolicy
 import org.mongodb.kbson.ObjectId
 
 class TrainingRepositoryImpl : TrainingRepository {
@@ -17,7 +18,7 @@ class TrainingRepositoryImpl : TrainingRepository {
 
     override fun save(training: Training) {
         realm.writeBlocking {
-            copyToRealm(training)
+            copyToRealm(training, UpdatePolicy.ALL)
         }
     }
 

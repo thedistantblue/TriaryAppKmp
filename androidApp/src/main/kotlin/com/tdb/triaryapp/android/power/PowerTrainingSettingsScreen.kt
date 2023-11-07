@@ -14,7 +14,7 @@ import org.mongodb.kbson.ObjectId
 @Composable
 fun PowerTrainingSettingsScreen(
         navController: NavController,
-        trainingId: ObjectId? = null,
+        trainingId: String? = null,
         viewModel: PowerTrainingViewModel,
 ) {
     val context = LocalContext.current
@@ -40,12 +40,12 @@ fun PowerTrainingSettingsScreen(
         NameDescriptionScreen(nameHint = R.string.training_name,
                               descriptionHint = R.string.training_description,
                               buttonHint = R.string.training_save,
-                              name = nameState,
-                              description = descriptionState,
+                              name = uiState.name,
+                              description = uiState.description,
                               onNameChanged = { viewModel.updateTrainingName(it) },
                               onDescriptionChanged = { viewModel.updateTrainingDescription(it) }
         ) { name, description ->
-            val training = Training(trainingId, name, description)
+            val training = Training(ObjectId.invoke(trainingId), name, description)
             viewModel.saveTraining(training)
             returnAndShowToast(context, navController, R.string.training_saved_toast)
         }
