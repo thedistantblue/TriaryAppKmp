@@ -11,4 +11,5 @@
     <string name="training_save">Сохранить тренировку</string>
     <string name="training_created_toast">Тренировка успешно создана!</string>
     <string name="training_saved_toast">Тренировка успешно сохранена!</string>
+    <string name="fab_add">Добавить</string>
 </resources>

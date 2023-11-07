@@ -20,6 +20,7 @@ object TriaryAppColors {
         onSecondary = triaryAppOnSecondary,
         surface = triaryAppSurface,
         onSurface = triaryAppOnSurface,
-        background = triaryAppBackground
+        background = triaryAppBackground,
+        surfaceVariant = triaryAppSurface
     )
 }

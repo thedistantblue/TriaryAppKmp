@@ -92,7 +92,7 @@ fun TabsScreen(navController: NavController, powerTrainingListViewModel: PowerTr
              floatingActionButton = {
                  ExtendedFloatingActionButton(
                      onClick = { navController.navigate("local/tabs/create_power") },
-                     content = { Text("asd") }
+                     content = { Text(text = stringResource(R.string.fab_add)) }
                  )
              },)
 }
