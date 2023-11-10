@@ -28,7 +28,7 @@ import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingListViewModel
 import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingListViewModelFactory
 import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingViewModel
 import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingViewModelFactory
-import com.thedistantblue.triaryapp.theme.TriaryAppTheme
+import com.tdb.triaryapp.android.theme.TriaryAppTheme
 
 class MainActivity : ComponentActivity() {
 

@@ -1,4 +1,4 @@
-package com.thedistantblue.triaryapp.theme.components
+package com.tdb.triaryapp.android.theme.components
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement

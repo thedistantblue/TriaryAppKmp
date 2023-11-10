@@ -20,7 +20,7 @@ import androidx.navigation.NavController
 import com.tdb.triaryapp.android.RouteConstants
 import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingListViewModel
 import com.tdb.triaryapp.entity.Training
-import com.thedistantblue.triaryapp.theme.components.TriaryAppSwipeToDismissCard
+import com.tdb.triaryapp.android.theme.components.TriaryAppSwipeToDismissCard
 
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable

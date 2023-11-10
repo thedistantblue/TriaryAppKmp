@@ -8,7 +8,7 @@ import androidx.navigation.NavController
 import com.tdb.triaryapp.android.R
 import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingViewModel
 import com.tdb.triaryapp.entity.Training
-import com.thedistantblue.triaryapp.theme.components.NameDescriptionScreen
+import com.tdb.triaryapp.android.theme.components.NameDescriptionScreen
 import org.mongodb.kbson.ObjectId
 
 @Composable

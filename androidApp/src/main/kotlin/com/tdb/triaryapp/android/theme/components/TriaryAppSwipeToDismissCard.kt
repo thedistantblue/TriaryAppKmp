@@ -1,4 +1,4 @@
-package com.thedistantblue.triaryapp.theme.components
+package com.tdb.triaryapp.android.theme.components
 
 import android.annotation.SuppressLint
 import android.os.Build

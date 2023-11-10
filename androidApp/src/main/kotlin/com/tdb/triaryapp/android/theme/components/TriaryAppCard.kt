@@ -1,4 +1,4 @@
-package com.thedistantblue.triaryapp.theme.components
+package com.tdb.triaryapp.android.theme.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
