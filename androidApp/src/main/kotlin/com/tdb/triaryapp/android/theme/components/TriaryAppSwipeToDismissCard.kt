@@ -1,5 +1,6 @@
 package com.thedistantblue.triaryapp.theme.components
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.animateColorAsState
@@ -20,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.scale
 import kotlinx.coroutines.launch
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @RequiresApi(Build.VERSION_CODES.S)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,10 +41,11 @@ fun TriaryAppSwipeToDismissCard(
 
             val color by animateColorAsState(
                 targetValue = when (dismissState.targetValue) {
-                    DismissValue.Default -> Color.LightGray
-                    DismissValue.DismissedToEnd -> Color.Green
-                    DismissValue.DismissedToStart -> Color.Red
-                }
+                    DismissValue.Default -> Color.Transparent
+                    DismissValue.DismissedToEnd -> Color.Transparent
+                    DismissValue.DismissedToStart -> Color.Transparent
+                },
+                label = "inspection label"
             )
 
             val icon = when (direction) {
@@ -50,9 +53,15 @@ fun TriaryAppSwipeToDismissCard(
                 DismissDirection.EndToStart -> Icons.Default.Delete
             }
 
+            val iconColor = when (direction) {
+                DismissDirection.StartToEnd -> Color(0xFF1DE9B6)
+                DismissDirection.EndToStart -> Color(0xFFFF1744)
+            }
+
             val scale by animateFloatAsState(
                 targetValue = if (dismissState.targetValue == DismissValue.Default)
-                    0.8f else 1.2f
+                    0.8f else 1.2f,
+                label = "inspection label"
             )
 
             if (dismissState.currentValue == DismissValue.DismissedToStart) {
@@ -61,11 +70,7 @@ fun TriaryAppSwipeToDismissCard(
 
             if (dismissState.currentValue == DismissValue.DismissedToEnd) {
                 onDismissedToEndAction.invoke(dismissState)
-                //val vibratorManager = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-                //val vib = vibratorManager.defaultVibrator
-                //vib.vibrate(VibrationEffect.createOneShot(100, 100))
                 coroutineScope.launch {
-                    //dismissState.animateTo(DismissValue.Default)
                     dismissState.snapTo(DismissValue.Default)
                 }
             }
@@ -82,7 +87,7 @@ fun TriaryAppSwipeToDismissCard(
                     .padding(start = 12.dp, end = 12.dp),
                 contentAlignment = alignment
             ) {
-                Icon(icon, contentDescription = "icon", modifier = Modifier.scale(scale))
+                Icon(icon, contentDescription = "icon", modifier = Modifier.scale(scale), tint = iconColor)
             }
         },
         dismissContent = {
