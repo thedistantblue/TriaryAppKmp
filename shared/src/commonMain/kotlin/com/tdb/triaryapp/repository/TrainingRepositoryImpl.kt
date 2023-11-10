@@ -24,7 +24,9 @@ class TrainingRepositoryImpl : TrainingRepository {
     }
 
     override fun delete(training: Training) {
-        realm.writeBlocking { delete(training) }
+        realm.writeBlocking {
+            findLatest(training)?.also { delete(it) }
+        }
     }
 
     override fun findById(trainingId: ObjectId): Training {
