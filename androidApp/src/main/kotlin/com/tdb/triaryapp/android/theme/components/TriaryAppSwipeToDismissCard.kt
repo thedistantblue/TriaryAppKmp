@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.stringResource
 import com.tdb.triaryapp.android.R
+import com.tdb.triaryapp.android.theme.TriaryAppColors
 import kotlinx.coroutines.launch
 
 @SuppressLint("CoroutineCreationDuringComposition")
@@ -69,6 +70,7 @@ fun TriaryAppSwipeToDismissCard(
 
             if (dismissState.currentValue == DismissValue.DismissedToStart) {
                 AlertDialog(
+                    containerColor = TriaryAppColors.triaryAppBackground,
                     icon = { Icon(icon, null) },
                     title = { Text(cardObject) },
                     text = {
