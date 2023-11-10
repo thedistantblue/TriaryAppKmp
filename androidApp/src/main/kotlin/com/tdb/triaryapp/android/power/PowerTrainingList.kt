@@ -4,12 +4,17 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.tdb.triaryapp.android.RouteConstants
 import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingListViewModel
@@ -36,7 +41,8 @@ fun PowerTrainingList(
 }
 
 @RequiresApi(Build.VERSION_CODES.S)
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class,
+       ExperimentalComposeUiApi::class)
 @Composable
 private fun TrainingListItem(
         training: Training,
@@ -45,19 +51,33 @@ private fun TrainingListItem(
 ) {
     val trainingId = training._id.toHexString()
     TriaryAppSwipeToDismissCard(
-        onClickAction = { navController.navigate(RouteConstants.Local.Tabs.Edit.EDIT_POWER + trainingId) },
         onDismissedToEndAction = {},
         onDismissedToStartAction = {
             viewModel.deleteTraining(training)
         }
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+        ConstraintLayout(
+            modifier = Modifier.fillMaxSize()
         ) {
-            Text(text = training.name)
-            Text(text = training.description)
+            val (column, iconButton) = createRefs()
+            Column(
+                modifier = Modifier.constrainAs(column) {
+                    centerHorizontallyTo(parent)
+                    centerVerticallyTo(parent)
+                },
+            ) {
+                Text(text = training.name)
+                Text(text = training.description)
+            }
+            IconButton(
+                onClick = { navController.navigate(RouteConstants.Local.Tabs.Edit.EDIT_POWER + trainingId) },
+                modifier = Modifier.constrainAs(iconButton) {
+                    centerVerticallyTo(parent)
+                    end.linkTo(parent.end)
+                }
+            ) {
+                Icon(Icons.Filled.Edit, "")
+            }
         }
     }
 }

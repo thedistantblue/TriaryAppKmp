@@ -49,6 +49,7 @@ dependencies {
     implementation("io.realm.kotlin:library-base:1.12.0")
     implementation("io.realm.kotlin:library-sync:1.12.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 
     debugImplementation(libs.compose.ui.tooling)
 }

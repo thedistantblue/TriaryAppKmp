@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TriaryAppSwipeToDismissCard(
-        onClickAction: () -> Unit,
+        onClickAction: () -> Unit = {},
         onDismissedToEndAction: (DismissState) -> Unit,
         onDismissedToStartAction: (DismissState) -> Unit,
         content: @Composable ColumnScope.() -> Unit
