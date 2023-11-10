@@ -26,8 +26,12 @@ class PowerTrainingViewModel(
     fun getTraining(trainingId: ObjectId) {
         // Смена имени или описания приводит к тому, что этот метод вызывается ещё раз и
         // затирает результаты. надо бы придумать что-то поумнее
-        currentTraining = repository.findById(trainingId)
-        uiState.value = currentTraining
+        // upd: простая проверка вроде как норм работает для решения этой проблемы, но надо
+        // все равно проанализировать, насколько норм решение
+        if (currentTraining._id != trainingId) {
+            currentTraining = repository.findById(trainingId)
+            uiState.value = currentTraining
+        }
     }
 
     fun createTraining(training: Training) {
