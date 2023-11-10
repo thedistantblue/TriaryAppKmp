@@ -55,7 +55,8 @@ private fun TrainingListItem(
         onDismissedToEndAction = {},
         onDismissedToStartAction = {
             viewModel.deleteTraining(training)
-        }
+        },
+        cardObject = training.name
     ) {
         ConstraintLayout(
             modifier = Modifier.fillMaxSize()

@@ -12,4 +12,8 @@
     <string name="training_created_toast">Тренировка успешно создана!</string>
     <string name="training_saved_toast">Тренировка успешно сохранена!</string>
     <string name="fab_add">Добавить</string>
+    <string name="swipe_to_dismiss_confirmation_dialog_title">Удаление</string>
+    <string name="swipe_to_dismiss_confirmation_dialog_text">Вы уверены, что хотите удалить данный объект?</string>
+    <string name="swipe_to_dismiss_confirmation_dialog_dismiss">Отмена</string>
+    <string name="swipe_to_dismiss_confirmation_dialog_confirm">Удалить</string>
 </resources>

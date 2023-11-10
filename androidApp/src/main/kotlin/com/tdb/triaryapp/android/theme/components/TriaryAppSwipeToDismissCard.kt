@@ -19,6 +19,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.res.stringResource
+import com.tdb.triaryapp.android.R
 import kotlinx.coroutines.launch
 
 @SuppressLint("CoroutineCreationDuringComposition")
@@ -29,6 +31,7 @@ fun TriaryAppSwipeToDismissCard(
         onClickAction: () -> Unit = {},
         onDismissedToEndAction: (DismissState) -> Unit,
         onDismissedToStartAction: (DismissState) -> Unit,
+        cardObject: String,
         content: @Composable ColumnScope.() -> Unit
 ) {
     val dismissState = rememberDismissState()
@@ -65,7 +68,36 @@ fun TriaryAppSwipeToDismissCard(
             )
 
             if (dismissState.currentValue == DismissValue.DismissedToStart) {
-                onDismissedToStartAction.invoke(dismissState)
+                AlertDialog(
+                    icon = { Icon(icon, null) },
+                    title = { Text(cardObject) },
+                    text = {
+                        Text(stringResource(R.string.swipe_to_dismiss_confirmation_dialog_text))
+                    },
+                    onDismissRequest = {
+                        coroutineScope.launch {
+                            dismissState.snapTo(DismissValue.Default)
+                        }
+                    },
+                    confirmButton = {
+                        TextButton(
+                            onClick = { onDismissedToStartAction.invoke(dismissState) }
+                        ) {
+                            Text(stringResource(R.string.swipe_to_dismiss_confirmation_dialog_confirm))
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(
+                            onClick = {
+                                coroutineScope.launch {
+                                    dismissState.snapTo(DismissValue.Default)
+                                }
+                            }
+                        ) {
+                            Text(stringResource(R.string.swipe_to_dismiss_confirmation_dialog_dismiss))
+                        }
+                    }
+                )
             }
 
             if (dismissState.currentValue == DismissValue.DismissedToEnd) {
