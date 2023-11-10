@@ -122,6 +122,7 @@ fun TabsScreen(navController: NavController, powerTrainingListViewModel: PowerTr
 
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
+// https://www.freecodecamp.org/news/tabs-in-jetpack-compose/ - как сделать переключение свайпом
 fun Tabs(
         powerTrainingListViewModel: PowerTrainingListViewModel,
         navController: NavController,
