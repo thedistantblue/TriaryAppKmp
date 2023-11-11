@@ -16,4 +16,7 @@
     <string name="swipe_to_dismiss_confirmation_dialog_text">Вы уверены, что хотите удалить данный объект?</string>
     <string name="swipe_to_dismiss_confirmation_dialog_dismiss">Отмена</string>
     <string name="swipe_to_dismiss_confirmation_dialog_confirm">Удалить</string>
+    <string name="training_detail_exercises">Упражнения</string>
+    <string name="training_detail_exercise_packs">Наборы упражнений</string>
+    <string name="training_detail_dates">Даты</string>
 </resources>

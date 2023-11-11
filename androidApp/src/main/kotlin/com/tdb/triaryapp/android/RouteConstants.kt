@@ -31,35 +31,39 @@ class RouteConstants {
             }
             class PowerTraining {
                 companion object {
-                    const val POWER_TRAINING = "$TABS/power"
+                    const val POWER_TRAINING_ROUTE = "$TABS/power/{trainingId}"
+                    const val POWER_TRAINING = "$TABS/power/"
                 }
                 class Exercises {
                     companion object {
-                        const val EXERCISES = "$POWER_TRAINING/exercises"
+                        const val EXERCISES_ROUTE = "$POWER_TRAINING/exercises/{trainingId}"
+                        const val EXERCISES = "$POWER_TRAINING/exercises/"
                     }
                     class Exercise {
                         companion object {
-                            const val EXERCISE = "$EXERCISES/{exerciseId}"
+                            const val EXERCISE_ROUTE = "$EXERCISES/{exerciseId}"
                         }
                     }
                 }
                 class Packs {
                     companion object {
-                        const val PACKS = "$POWER_TRAINING/packs"
+                        const val PACKS_ROUTE = "$POWER_TRAINING/packs/{trainingId}"
+                        const val PACKS = "$POWER_TRAINING/packs/"
                     }
                     class Pack {
                         companion object {
-                            const val PACK = "$PACKS/{packId}"
+                            const val PACK_ROUTE = "$PACKS/{packId}"
                         }
                     }
                 }
                 class Dates {
                     companion object {
-                        const val DATES = "$POWER_TRAINING/dates"
+                        const val DATES_ROUTE = "$POWER_TRAINING/dates/{trainingId}"
+                        const val DATES = "$POWER_TRAINING/dates/"
                     }
                     class Date {
                         companion object {
-                            const val DATE = "$DATES/{dateId}"
+                            const val DATE_ROUTE = "$DATES/{dateId}"
                         }
                     }
                 }

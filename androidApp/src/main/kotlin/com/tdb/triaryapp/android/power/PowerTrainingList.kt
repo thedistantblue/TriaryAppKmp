@@ -12,7 +12,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -42,8 +41,7 @@ fun PowerTrainingList(
 }
 
 @RequiresApi(Build.VERSION_CODES.S)
-@OptIn(ExperimentalMaterial3Api::class,
-       ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TrainingListItem(
         training: Training,
@@ -52,6 +50,7 @@ private fun TrainingListItem(
 ) {
     val trainingId = training._id.toHexString()
     TriaryAppSwipeToDismissCard(
+        onClickAction = { navController.navigate(RouteConstants.Local.Tabs.PowerTraining.POWER_TRAINING + trainingId) },
         onDismissedToEndAction = {},
         onDismissedToStartAction = {
             viewModel.deleteTraining(training)

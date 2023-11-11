@@ -16,4 +16,7 @@
     <string name="swipe_to_dismiss_confirmation_dialog_text">Are you sure you want to delete this item?</string>
     <string name="swipe_to_dismiss_confirmation_dialog_dismiss">Dismiss</string>
     <string name="swipe_to_dismiss_confirmation_dialog_confirm">Delete</string>
+    <string name="training_detail_exercises">Exercises</string>
+    <string name="training_detail_exercise_packs">Exercise packs</string>
+    <string name="training_detail_dates">Dates</string>
 </resources>
