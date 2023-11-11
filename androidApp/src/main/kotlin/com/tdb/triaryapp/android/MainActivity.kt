@@ -6,6 +6,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
@@ -33,6 +35,8 @@ import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingListViewModelFacto
 import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingViewModel
 import com.tdb.triaryapp.android.power.viewmodel.PowerTrainingViewModelFactory
 import com.tdb.triaryapp.android.theme.TriaryAppTheme
+import com.tdb.triaryapp.android.theme.components.FabEnterTransition
+import com.tdb.triaryapp.android.theme.components.FabExitTransition
 
 class MainActivity : ComponentActivity() {
 
@@ -74,7 +78,9 @@ private fun NavGraphBuilder.tabsRoute(navController: NavController,
         composable(RouteConstants.Local.Tabs.TABS) {
             TabsScreen(navController, trainingListViewModel)
         }
-        composable(RouteConstants.Local.Tabs.Create.CREATE_POWER) {
+        composable(RouteConstants.Local.Tabs.Create.CREATE_POWER,
+                   enterTransition = { this.FabEnterTransition() },
+                   exitTransition = { this.FabExitTransition() }) {
             PowerTrainingSettingsScreen(navController, null, trainingViewModel)
         }
         composable(RouteConstants.Local.Tabs.Edit.EDIT_POWER_ROUTE) {
